@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Result {
 
-    @SerializedName("total")
-    private long total;
+//    @SerializedName("total")
+//    private long total;
 
     @SerializedName("totalHits")
     private int totalHits;
@@ -15,13 +15,13 @@ public class Result {
     @SerializedName("hits")
     private ArrayList<Hit> hits;
 
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
-    }
+//    public long getTotal() {
+//        return total;
+//    }
+//
+//    public void setTotal(long total) {
+//        this.total = total;
+//    }
 
     public int getTotalHits() {
         return totalHits;
