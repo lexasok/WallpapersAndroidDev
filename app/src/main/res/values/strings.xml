@@ -12,4 +12,7 @@
     <!--Labels-->
     <string name="title_activity_search_result">SearchResult</string>
 
+    <!--Titles-->
+    <string name="title_colors">Choose color</string>
+
 </resources>

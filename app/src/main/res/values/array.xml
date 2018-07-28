@@ -26,4 +26,20 @@
         <item>music</item>
     </array>
 
+    <!--Colors-->
+    <array name="colors">
+        <item>grayscale</item>
+        <item>transparent</item>
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>turquoise</item>
+        <item>blue</item>
+        <item>lilac</item>
+        <item>pink</item>
+        <item>white</item>
+        <item>gray</item>
+        <item>black</item>
+    </array>
 </resources>
