@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import net.ozero.wallpapersandroiddev.rest.model.Hit;
 import net.ozero.wallpapersandroiddev.rest.model.Result;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 public class SearchResultActivity extends AppCompatActivity {
 
     private ArrayList<Hit> hits;
+    private RVAdapter rvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,29 +32,26 @@ public class SearchResultActivity extends AppCompatActivity {
         hits = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.rvSearchResult);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        final RVAdapter rvAdapter = new RVAdapter(this, hits);
+        rvAdapter = new RVAdapter(this);
         recyclerView.setAdapter(rvAdapter);
 
-        App.getRestClient().getApi()
-                .search("yellow", "photo")
-                .enqueue(new Callback<Result>() {
-                    @Override
-                    public void onResponse(Call<Result> call, Response<Result> response) {
-                        if (response.isSuccessful()) {
-                            Result result = response.body();
-                            if (result.getTotalHits() > 0) {
-                                rvAdapter.addData(result.getHits());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Result> call, Throwable t) {
-
-                    }
-                });
-
-        
+//        App.getRestClient().getApi()
+//                .searchPaginated("yellow", "photo", 1, 30)
+//                .enqueue(new Callback<Result>() {
+//                    @Override
+//                    public void onResponse(Call<Result> call, Response<Result> response) {
+//                        if (response.isSuccessful()) {
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Result> call, Throwable t) {
+//
+//                    }
+//                });
+//
+//
     }
 
 }

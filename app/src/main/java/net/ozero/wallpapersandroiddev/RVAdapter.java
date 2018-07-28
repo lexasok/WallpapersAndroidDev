@@ -20,9 +20,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<Hit> mData;
 
-    public RVAdapter(Context context, ArrayList<Hit> hits) {
+    public RVAdapter(Context context) {
         mContext = context;
-        mData = hits;
+        mData = new ArrayList<>();
     }
 
     @NonNull
