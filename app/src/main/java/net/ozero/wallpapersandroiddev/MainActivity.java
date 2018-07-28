@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity
         ArrayAdapter<?> spinnerAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.colors,
-                android.R.layout.simple_spinner_item
+                R.layout.spinner_item
         );
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
     }

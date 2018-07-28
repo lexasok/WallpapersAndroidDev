@@ -10,5 +10,6 @@
     <!--Text-->
     <dimen name="size_text_l">24sp</dimen>
     <dimen name="size_text_m">18sp</dimen>
+    <dimen name="padding_s">8dp</dimen>
 
 </resources>
