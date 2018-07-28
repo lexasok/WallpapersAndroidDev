@@ -51,6 +51,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
         return mData.size();
     }
 
+    public void addData(ArrayList<Hit> hits) {
+        mData.addAll(hits);
+        notifyDataSetChanged();
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;
