@@ -16,7 +16,7 @@ public interface Api {
     );
 
     @GET("?key=" + App.API_KEY)
-    Call<Result> searchPaginate(
+    Call<Result> searchPaginated(
             @Query("q") String query,
             @Query("image_type") String imageType,
             @Query("page") int page,

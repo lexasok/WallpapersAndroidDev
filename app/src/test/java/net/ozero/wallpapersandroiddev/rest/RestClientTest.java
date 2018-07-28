@@ -42,4 +42,20 @@ public class RestClientTest {
 //        });
     }
 
+    @Test
+    public void searchPaginated() {
+        RestClient restClient = new RestClient();
+        try {
+            Response response = restClient.getApi().searchPaginated("yellow", "photo", 1, 10).execute();
+            System.out.println("resp");
+            Result result = (Result) response.body();
+
+            System.out.println(result.getHits().size());
+            assertEquals(10, result.getHits().size());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
