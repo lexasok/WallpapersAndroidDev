@@ -35,6 +35,18 @@ public class SearchResultActivity extends AppCompatActivity {
         rvAdapter = new RVAdapter(this);
         recyclerView.setAdapter(rvAdapter);
 
+        App.getRestClient().getApi().search("yellow", "photo").enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        });
+
 //        App.getRestClient().getApi()
 //                .searchPaginated("yellow", "photo", 1, 30)
 //                .enqueue(new Callback<Result>() {
