@@ -22,7 +22,8 @@
         <activity
             android:name=".SearchResult"
             android:label="@string/title_activity_search_result"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
