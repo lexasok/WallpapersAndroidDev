@@ -15,5 +15,13 @@ public interface Api {
             @Query("image_type") String imageType
     );
 
+    @GET("?key=" + App.API_KEY)
+    Call<Result> searchPaginate(
+            @Query("q") String query,
+            @Query("image_type") String imageType,
+            @Query("page") int page,
+            @Query("per_page") int perPage
+    );
+
 
 }
