@@ -2,7 +2,7 @@
 <resources>
 
     <!--Tabs-->
-    <string-array name="tabs">
+    <array name="tabs">
         <item>fashion</item>
         <item>nature</item>
         <item>backgrounds</item>
@@ -23,6 +23,6 @@
         <item>buildings</item>
         <item>business</item>
         <item>music</item>
-    </string-array>
+    </array>
 
 </resources>
