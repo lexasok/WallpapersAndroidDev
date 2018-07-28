@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +50,17 @@ public class MainActivity extends AppCompatActivity
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         setupTabs(viewPager, tabLayout);
+
+        //Color filter - spinner
+        Spinner spinner = findViewById(R.id.chooseColoresSpinner);
+        ArrayAdapter<?> spinnerAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.colors,
+                android.R.layout.simple_spinner_item
+        );
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+
     }
 
     private void setupTabs(ViewPager viewPager, TabLayout tabLayout) {

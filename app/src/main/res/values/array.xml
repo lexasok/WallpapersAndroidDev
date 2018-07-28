@@ -28,6 +28,7 @@
 
     <!--Colors-->
     <array name="colors">
+        <item>none</item>
         <item>grayscale</item>
         <item>transparent</item>
         <item>red</item>

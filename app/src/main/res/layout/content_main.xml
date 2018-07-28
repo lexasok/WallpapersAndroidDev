@@ -43,21 +43,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/chooseColoreTitleTextView"
-        app:layout_constraintTop_toTopOf="@+id/chooseColoreTitleTextView" />
+        app:layout_constraintTop_toTopOf="@+id/chooseColoreTitleTextView"
+        android:entries="@array/colors"
+        android:textAlignment="center"
+        />
 
     <TextView
         android:id="@+id/chooseColoreTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="@dimen/padding_m"
         android:text="@string/title_colors"
         android:textColor="@color/colorTextBright"
-        android:textSize="30sp"
+        android:textSize="@dimen/size_text_m"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="@dimen/padding_m"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
