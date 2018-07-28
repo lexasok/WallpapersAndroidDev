@@ -11,4 +11,29 @@
 
     <!--Labels-->
     <string name="title_activity_search_result">SearchResult</string>
+
+    <!--Tabs-->
+    <string-array name="tabs">
+        <item>fashion</item>
+        <item>nature</item>
+        <item>backgrounds</item>
+        <item>science</item>
+        <item>education</item>
+        <item>people</item>
+        <item>feelings</item>
+        <item>religion</item>
+        <item>health</item>
+        <item>places</item>
+        <item>animals</item>
+        <item>industry</item>
+        <item>food</item>
+        <item>computer</item>
+        <item>sports</item>
+        <item>transportation</item>
+        <item>travel</item>
+        <item>buildings</item>
+        <item>business</item>
+        <item>music</item>
+    </string-array>
+
 </resources>
