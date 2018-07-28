@@ -3,6 +3,7 @@
 
     <!--Tabs-->
     <array name="tabs">
+        <itme>best</itme>
         <item>fashion</item>
         <item>nature</item>
         <item>backgrounds</item>
