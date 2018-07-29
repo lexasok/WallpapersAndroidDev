@@ -1,5 +1,6 @@
 package net.ozero.wallpapersandroiddev;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,13 +33,21 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return mTitles.get(position);
     }
 
-    public void addFragments(ArrayList<String> titles) {
+    public void addFragments(ArrayList<String> titles, String color) {
+        mFragments.clear();
         for (String title : titles) {
+            Bundle bundle = new Bundle();
+            bundle.putString(App.KEY_COLOR_TO_FRAGMENT, color);
+            bundle.putString(App.KEY_TITLE, title);
             MainFragment fragment = new MainFragment();
-            fragment.setTitle(title);
+            fragment.setArguments(bundle);
             mFragments.add(fragment);
             mTitles.add(title);
         }
+    }
+
+    public void addColorFilter(String color) {
+
     }
 
 }

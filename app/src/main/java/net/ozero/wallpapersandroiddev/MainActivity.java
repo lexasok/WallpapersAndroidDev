@@ -3,6 +3,7 @@ package net.ozero.wallpapersandroiddev;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -14,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Spinner colorsSpinner;
+    private ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +50,34 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //tabs & viewPager
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        final ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         setupTabs(viewPager, tabLayout);
 
         //Color filter - spinner
         colorsSpinner = findViewById(R.id.chooseColoresSpinner);
-        ArrayAdapter<?> spinnerAdapter = ArrayAdapter.createFromResource(
+        final ArrayAdapter<?> spinnerAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.colors,
                 R.layout.spinner_item
         );
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         colorsSpinner.setAdapter(spinnerAdapter);
+        //init color filter
+        colorsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ArrayList<String> titles = new ArrayList<>();
+                String[] stringArray = getResources().getStringArray(R.array.tabs);
+                Collections.addAll(titles, stringArray);
+                viewPagerAdapter.addFragments(titles, colorsSpinner.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
@@ -69,8 +88,8 @@ public class MainActivity extends AppCompatActivity
         Collections.addAll(titles, stringArray);
 
         //implement adapter
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragments(titles);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragments(titles, "none");
 
         //setup viewPager
         viewPager.setAdapter(viewPagerAdapter);
@@ -135,11 +154,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    public String getStringColor() {
-        String color = colorsSpinner.getSelectedItem().toString();
-        return color;
-    }
-
 
 }

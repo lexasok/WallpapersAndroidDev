@@ -12,6 +12,8 @@ public class App extends Application {
 
     //Extras
     public static final String EXTRA_SEARCH = "search";
+    public static final String KEY_COLOR_TO_FRAGMENT = "color" ;
+    public static final String KEY_TITLE = "title";
 
     private static RestClient restClient;
 
