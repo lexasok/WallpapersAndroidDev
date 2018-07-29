@@ -18,7 +18,6 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private String mTitle;
     private String mColor = App.COLOR_NONE;
-    private TextView colorTestTextView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RVAdapter mAdapter;
     private RecyclerView recyclerView;
@@ -49,8 +48,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         recyclerView.setAdapter(mAdapter);
 
         //loading data
-
-
+        load();
 
         return view;
     }
@@ -61,9 +59,9 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void load() {
-        boolean isColoreFiltered = mColor.equals(App.COLOR_NONE);
+        boolean isColorFiltered = mColor.equals(App.COLOR_NONE);
         boolean isEditorChoice = mTitle.equals(App.CATEGORY_BEST);
-        if (!isColoreFiltered) {
+        if (!isColorFiltered) {
             if (isEditorChoice) {
 
                 ContentLoader contentLoader = new ContentLoader(
@@ -127,5 +125,6 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 ));
             }
         }
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
