@@ -30,6 +30,39 @@
             android:textColor="@color/colorTextBright"
             android:background="@color/colorPrimary"/>
 
+        <LinearLayout
+            android:id="@+id/alertLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/confirmButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@android:string/yes"
+                android:gravity="center"
+                android:padding="@dimen/padding_s"
+                android:textColor="@color/colorTextBright"
+                android:textSize="@dimen/size_text_m"/>
+
+            <TextView
+                android:id="@+id/discardButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@android:string/no"
+                android:padding="@dimen/padding_s"
+                android:gravity="center"
+                android:textColor="@color/colorTextBright"
+                android:textSize="@dimen/size_text_m"/>
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/imageInfoTextView"
             android:layout_width="match_parent"

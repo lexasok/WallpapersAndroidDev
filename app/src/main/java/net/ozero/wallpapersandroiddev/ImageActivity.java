@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,18 +34,42 @@ public class ImageActivity extends AppCompatActivity {
     private String imageURL = "";
     private String pageURL = "";
     private String wallpaperURL = "";
+
+    //views
     private ImageView imageView;
     private TextView link;
     private TextView setWallpaperButton;
+    private LinearLayout alertLinearLayout;
+    private TextView confirmButton;
+    private TextView discardButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
 
+        //inti views
         imageView = findViewById(R.id.imageViewImageActivity);
         link = findViewById(R.id.imageInfoTextView);
         setWallpaperButton = findViewById(R.id.setWallpapersButton);
+        alertLinearLayout = findViewById(R.id.alertLinearLayout);
+        confirmButton = findViewById(R.id.confirmButton);
+        discardButton = findViewById(R.id.discardButton);
+
+        //init alert buttons
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWallpaper();
+                closeAlertMenu();
+            }
+        });
+        discardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeAlertMenu();
+            }
+        });
 
         if (getIntent().hasExtra(App.EXTRA_IMAGE)) {
 
@@ -62,7 +87,7 @@ public class ImageActivity extends AppCompatActivity {
             setWallpaperButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onCreateDialog(1);
+                    showAlertMenu();
                 }
             });
 
@@ -100,25 +125,14 @@ public class ImageActivity extends AppCompatActivity {
                 ).show();
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ImageActivity.this);
-        builder
-                .setMessage(getResources().getString(R.string.title_alert))
-                .setCancelable(false)
-                .setPositiveButton("yes!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setWallpaper();
-                    }
-                })
-                .setNegativeButton("no!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        return builder.create();
+    private void showAlertMenu() {
+        alertLinearLayout.setVisibility(View.VISIBLE);
+        setWallpaperButton.setText(getResources().getString(R.string.title_alert));
     }
+
+    private void closeAlertMenu() {
+        alertLinearLayout.setVisibility(View.GONE);
+        setWallpaperButton.setText(getResources().getString(R.string.title_set_wallpaper_button));
+    }
+
 }
