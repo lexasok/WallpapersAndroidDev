@@ -1,7 +1,6 @@
 package net.ozero.wallpapersandroiddev;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
@@ -17,13 +16,16 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
     private RVAdapter mAdapter;
     private int loadingPosition;
     private int page;
+    private ContentLoader mContentLoader;
 
 
-    public ScrollListener(GridLayoutManager layoutManager, RVAdapter adapter) {
+    public ScrollListener(GridLayoutManager layoutManager, RVAdapter adapter, ContentLoader contentLoader) {
         mLayoutManager = layoutManager;
         loadingPosition = PER_PAGE;
         mAdapter = adapter;
         page = FIRS_PAGE_NUM;
+        mContentLoader = contentLoader;
+
     }
 
     @Override
@@ -39,8 +41,7 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
         if (lastVisibleItemPosition == loadingPosition - LOADING_ALLOWANCE - 1) {
             page += 1;
             loadingPosition += PER_PAGE;
-            ContentLoader contentLoader = new ContentLoader(mAdapter);
-            contentLoader.loadNext(page);
+            mContentLoader.loadNext(page);
         }
 
     }

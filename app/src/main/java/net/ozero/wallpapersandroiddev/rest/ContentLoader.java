@@ -13,53 +13,132 @@ import retrofit2.Response;
 
 public class ContentLoader {
 
-    private RVAdapter mAdapter;
+    private static final int FIRS_PAGE = 1;
 
-    public ContentLoader(RVAdapter adapter) {
+    private RVAdapter mAdapter;
+    private LoadingType mLoadingType;
+    private Api mApi;
+    private String mQuery;
+    private String mColor;
+
+    public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color) {
         mAdapter = adapter;
+        mLoadingType = loadingType;
+        mApi = App.getRestClient().getApi();
+        mQuery = query;
+        mColor = color;
     }
 
     public void loadNext(int page) {
-        App
-                .getRestClient()
-                .getApi()
-                .searchPaginated("yellow", page)
-                .enqueue(new Callback<Result>() {
-                    @Override
-                    public void onResponse(Call<Result> call, Response<Result> response) {
-                        if (response.isSuccessful()) {
-                            Result result = response.body();
-                            ArrayList<Hit> hits = result.getHits();
-                            mAdapter.addData(hits);
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Result> call, Throwable t) {
-
-                    }
-                });
     }
 
-    public void loadFirs() {
-        App
-                .getRestClient()
-                .getApi()
-                .search("yellow")
-                .enqueue(new Callback<Result>() {
-                    @Override
-                    public void onResponse(Call<Result> call, Response<Result> response) {
-                        if (response.isSuccessful()) {
-                            Result result = response.body();
-                            ArrayList<Hit> hits = result.getHits();
-                            mAdapter.addData(hits);
-                        }
-                    }
+    public void searchFirst() {
+        switch (mLoadingType) {
+            case search:
+                mApi
+                        .search(mQuery, FIRS_PAGE)
+                        .enqueue(new Callback<Result>() {
+                            @Override
+                            public void onResponse(Call<Result> call, Response<Result> response) {
+                                if (response.isSuccessful()) {
+                                    Result result = response.body();
+                                    ArrayList<Hit> hits = result.getHits();
+                                    mAdapter.addData(hits);
+                                }
+                            }
 
-                    @Override
-                    public void onFailure(Call<Result> call, Throwable t) {
+                            @Override
+                            public void onFailure(Call<Result> call, Throwable t) {
 
-                    }
-                });
+                            }
+                        });
+                break;
+
+            case category:
+                mApi
+                        .loadCategory(mQuery, FIRS_PAGE)
+                        .enqueue(new Callback<Result>() {
+                            @Override
+                            public void onResponse(Call<Result> call, Response<Result> response) {
+                                if (response.isSuccessful()) {
+                                    Result result = response.body();
+                                    ArrayList<Hit> hits = result.getHits();
+                                    mAdapter.addData(hits);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Result> call, Throwable t) {
+
+                            }
+                        });
+                break;
+
+            case categoryWithColor:
+                mApi
+                        .loadCategoryWithColor(mQuery, mColor, FIRS_PAGE)
+                        .enqueue(new Callback<Result>() {
+                            @Override
+                            public void onResponse(Call<Result> call, Response<Result> response) {
+                                if (response.isSuccessful()) {
+                                    Result result = response.body();
+                                    ArrayList<Hit> hits = result.getHits();
+                                    mAdapter.addData(hits);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Result> call, Throwable t) {
+
+                            }
+                        });
+                break;
+
+            case editorChose:
+                mApi
+                        .loadEditorsChose(true, FIRS_PAGE)
+                        .enqueue(new Callback<Result>() {
+                            @Override
+                            public void onResponse(Call<Result> call, Response<Result> response) {
+                                if (response.isSuccessful()) {
+                                    Result result = response.body();
+                                    ArrayList<Hit> hits = result.getHits();
+                                    mAdapter.addData(hits);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Result> call, Throwable t) {
+
+                            }
+                        });
+                break;
+
+            case editorChoseWithColor:
+                mApi
+                        .loadEditorsChoiceWithColor(mColor, true, FIRS_PAGE)
+                        .enqueue(new Callback<Result>() {
+                            @Override
+                            public void onResponse(Call<Result> call, Response<Result> response) {
+                                if (response.isSuccessful()) {
+                                    Result result = response.body();
+                                    ArrayList<Hit> hits = result.getHits();
+                                    mAdapter.addData(hits);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Result> call, Throwable t) {
+
+                            }
+                        });
+        }
+
+
+    }
+
+    public enum LoadingType {
+        search, category, categoryWithColor, editorChose, editorChoseWithColor
     }
 }
