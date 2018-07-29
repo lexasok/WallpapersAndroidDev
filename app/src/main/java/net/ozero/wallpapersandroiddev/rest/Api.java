@@ -17,8 +17,7 @@ public interface Api {
     @GET("?key=" + App.API_KEY)
     Call<Result> searchPaginated(
             @Query("q") String query,
-            @Query("page") int page,
-            @Query("per_page") int perPage
+            @Query("page") int page
     );
 
 

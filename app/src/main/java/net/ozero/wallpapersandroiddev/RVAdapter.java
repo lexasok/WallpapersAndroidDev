@@ -39,10 +39,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         ImageView imageView = holder.imageView;
-//        Glide
-//                .with(mContext)
-//                .load(mData.get(position).getWebformatURL())
-//                .into(imageView);
+        Glide
+                .with(mContext)
+                .load(mData.get(position).getWebformatURL())
+                .into(imageView);
 
     }
 
