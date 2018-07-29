@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+
+
                 mColor = colorsSpinner.getSelectedItem().toString();
 
                 setupTabs(viewPager, tabLayout, mColor);
