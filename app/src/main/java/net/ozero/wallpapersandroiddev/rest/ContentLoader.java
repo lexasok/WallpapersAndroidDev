@@ -21,10 +21,12 @@ public class ContentLoader {
     private String mQuery;
     private String mColor;
     private Callback<Result> mCallback;
+//    private RestClient mRestClient;
 
     public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color) {
         mAdapter = adapter;
         mLoadingType = loadingType;
+//        mRestClient = new RestClient();
         mApi = App.getRestClient().getApi();
         mQuery = query;
         mColor = color;
@@ -66,7 +68,7 @@ public class ContentLoader {
                         .enqueue(mCallback);
                 break;
 
-            case editorChose:
+            case editorChoice:
                 mApi
                         .loadEditorsChose(true, page)
                         .enqueue(mCallback);
@@ -84,6 +86,6 @@ public class ContentLoader {
     }
 
     public enum LoadingType {
-        search, category, categoryWithColor, editorChose, editorChoseWithColor
+        search, category, categoryWithColor, editorChoice, editorChoseWithColor
     }
 }

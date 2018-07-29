@@ -19,6 +19,7 @@ public class App extends Application {
 
     private static RestClient restClient;
 
+
     @Override
     public void onCreate() {
         super.onCreate();

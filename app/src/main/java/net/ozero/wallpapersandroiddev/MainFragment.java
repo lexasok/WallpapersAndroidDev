@@ -33,8 +33,12 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        //title
-        mTitle = getArguments().getString(App.KEY_TITLE);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         //init swipe to refresh
         swipeRefreshLayout = view.findViewById(R.id.swipeToRefresh);
@@ -49,24 +53,23 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         //loading data
         load();
-
-        return view;
     }
 
     @Override
     public void onRefresh() {
-        load();
+//        load();
     }
 
     private void load() {
-        boolean isColorFiltered = mColor.equals(App.COLOR_NONE);
+
+        boolean isColorFiltered = !mColor.equals(App.COLOR_NONE);
         boolean isEditorChoice = mTitle.equals(App.CATEGORY_BEST);
         if (!isColorFiltered) {
             if (isEditorChoice) {
 
                 ContentLoader contentLoader = new ContentLoader(
                         mAdapter,
-                        ContentLoader.LoadingType.editorChose,
+                        ContentLoader.LoadingType.editorChoice,
                         mTitle,
                         mColor
                 );
@@ -86,6 +89,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         mTitle,
                         mColor
                 );
+                contentLoader.load(App.FIRST_PAGE);
                 //pagination
                 recyclerView.addOnScrollListener(new ScrollListener(
                         layoutManager,
@@ -117,6 +121,7 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         mTitle,
                         mColor
                 );
+                contentLoader.load(App.FIRST_PAGE);
                 //pagination
                 recyclerView.addOnScrollListener(new ScrollListener(
                         layoutManager,
@@ -126,5 +131,13 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         }
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void setmTitle(String title) {
+        mTitle = title;
+    }
+
+    public void setmColor(String color) {
+        mColor = color;
     }
 }
