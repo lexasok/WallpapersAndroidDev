@@ -23,7 +23,7 @@ public class SearchResultActivity extends AppCompatActivity {
         rvAdapter = new RVAdapter(this);
         recyclerView.setAdapter(rvAdapter);
         ContentLoader contentLoader = new ContentLoader(rvAdapter);
-        contentLoader.searchFirst();
+        contentLoader.laodFirst();
         recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter));
     }
 

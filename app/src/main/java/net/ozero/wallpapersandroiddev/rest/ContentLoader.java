@@ -33,7 +33,7 @@ public class ContentLoader {
 
     }
 
-    public void searchFirst() {
+    public void laodFirst() {
         switch (mLoadingType) {
             case search:
                 mApi
@@ -133,6 +133,10 @@ public class ContentLoader {
 
                             }
                         });
+                break;
+
+            default:
+                break;
         }
 
 
