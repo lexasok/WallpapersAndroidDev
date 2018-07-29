@@ -41,7 +41,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
         ImageView imageView = holder.imageView;
         Glide
                 .with(mContext)
-                .load(mData.get(position).getWebformatURL())
+                .load(mData.get(position).getPreviewURL())
                 .into(imageView);
 
     }

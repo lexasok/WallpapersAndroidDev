@@ -12,4 +12,7 @@
     <dimen name="size_text_m">18sp</dimen>
     <dimen name="padding_s">8dp</dimen>
 
+    <!--Image-->
+    <dimen name="size_image_preview_height">150dp</dimen>
+
 </resources>

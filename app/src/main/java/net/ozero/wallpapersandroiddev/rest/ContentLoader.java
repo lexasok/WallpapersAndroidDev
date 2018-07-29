@@ -13,7 +13,13 @@ import retrofit2.Response;
 
 public class ContentLoader {
 
-    public void load(final RVAdapter adapter, int page) {
+    private RVAdapter mAdapter;
+
+    public ContentLoader(RVAdapter adapter) {
+        mAdapter = adapter;
+    }
+
+    public void loadNext(int page) {
         App
                 .getRestClient()
                 .getApi()
@@ -24,7 +30,29 @@ public class ContentLoader {
                         if (response.isSuccessful()) {
                             Result result = response.body();
                             ArrayList<Hit> hits = result.getHits();
-                            adapter.addData(hits);
+                            mAdapter.addData(hits);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    public void loadFirs() {
+        App
+                .getRestClient()
+                .getApi()
+                .search("yellow")
+                .enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        if (response.isSuccessful()) {
+                            Result result = response.body();
+                            ArrayList<Hit> hits = result.getHits();
+                            mAdapter.addData(hits);
                         }
                     }
 
