@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
@@ -11,6 +12,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private RVAdapter rvAdapter;
     private GridLayoutManager layoutManager;
+    private String mQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +20,9 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
         //getting query
-        String query = getIntent().getStringExtra(App.EXTRA_SEARCH);
+        if (getIntent().hasExtra(App.EXTRA_SEARCH)) {
+            mQuery = getIntent().getStringExtra(App.EXTRA_SEARCH);
+        }
 
         //init RV
         RecyclerView recyclerView = findViewById(R.id.rvSearchResult);
@@ -31,7 +35,7 @@ public class SearchResultActivity extends AppCompatActivity {
         ContentLoader contentLoader = new ContentLoader(
                 rvAdapter,
                 ContentLoader.LoadingType.search,
-                query,
+                mQuery,
                 null
         );
         contentLoader.load(App.FIRST_PAGE);
@@ -40,4 +44,17 @@ public class SearchResultActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter, contentLoader));
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(App.EXTRA_SEARCH, mQuery);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        mQuery = savedInstanceState.getString(App.EXTRA_SEARCH);
+    }
 }
