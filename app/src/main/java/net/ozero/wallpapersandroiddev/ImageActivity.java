@@ -2,6 +2,7 @@ package net.ozero.wallpapersandroiddev;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ public class ImageActivity extends AppCompatActivity {
     private String pageURL = "";
     private String wallpaperURL = "";
     private ImageView imageView;
-    private TextView textView;
+    private TextView link;
     private TextView setWallpaperButton;
 
     @Override
@@ -22,7 +23,7 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         imageView = findViewById(R.id.imageViewImageActivity);
-        textView = findViewById(R.id.imageInfoTextView);
+        link = findViewById(R.id.imageInfoTextView);
         setWallpaperButton = findViewById(R.id.setWallpapersButton);
 
         if (getIntent().hasExtra(App.EXTRA_IMAGE)) {
@@ -36,7 +37,21 @@ public class ImageActivity extends AppCompatActivity {
                     .load(wallpaperURL)
                     .into(imageView);
 
-            textView.setText(pageURL);
+            link.setText(pageURL);
+
+            setWallpaperButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            link.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 }
