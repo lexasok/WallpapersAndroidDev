@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         //tabs & viewPager
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
-        setupTabs(viewPager, tabLayout);
+        setupTabs(viewPager, tabLayout, App.COLOR_NONE);
 
         //Color filter - spinner
         colorsSpinner = findViewById(R.id.chooseColoresSpinner);
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void setupTabs(ViewPager viewPager, TabLayout tabLayout) {
+    private void setupTabs(ViewPager viewPager, TabLayout tabLayout, String color) {
         //getting titles
         ArrayList<String> titles = new ArrayList<>();
         String[] stringArray = getResources().getStringArray(R.array.tabs);
