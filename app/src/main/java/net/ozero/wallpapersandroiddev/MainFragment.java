@@ -34,6 +34,9 @@ public class MainFragment extends Fragment {
         RVAdapter adapter = new RVAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
+        //loading data
+
+
         return view;
     }
 

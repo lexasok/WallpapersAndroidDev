@@ -23,6 +23,8 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Spinner colorsSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +51,14 @@ public class MainActivity extends AppCompatActivity
         setupTabs(viewPager, tabLayout);
 
         //Color filter - spinner
-        Spinner spinner = findViewById(R.id.chooseColoresSpinner);
+        colorsSpinner = findViewById(R.id.chooseColoresSpinner);
         ArrayAdapter<?> spinnerAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.colors,
                 R.layout.spinner_item
         );
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        colorsSpinner.setAdapter(spinnerAdapter);
 
     }
 
@@ -132,6 +134,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public String getStringColor() {
+        String color = colorsSpinner.getSelectedItem().toString();
+        return color;
     }
 
 
