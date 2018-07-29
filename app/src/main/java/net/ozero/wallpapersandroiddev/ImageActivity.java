@@ -1,6 +1,9 @@
 package net.ozero.wallpapersandroiddev;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.WallpaperManager;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -51,7 +54,7 @@ public class ImageActivity extends AppCompatActivity {
 
             Glide
                     .with(this)
-                    .load(wallpaperURL)
+                    .load(imageURL)
                     .into(imageView);
 
             link.setText(pageURL);
@@ -59,21 +62,7 @@ public class ImageActivity extends AppCompatActivity {
             setWallpaperButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Glide.with(getApplicationContext())
-                            .asBitmap()
-                            .load(wallpaperURL)
-                            .into(new SimpleTarget<Bitmap>() {
-                                @Override
-                                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                                    WallpaperManager wallpaperManager
-                                            = WallpaperManager.getInstance(getApplicationContext());
-                                    try {
-                                        wallpaperManager.setBitmap(resource);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
+                    onCreateDialog(1);
                 }
             });
 
@@ -84,5 +73,52 @@ public class ImageActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void setWallpaper() {
+        Glide
+                .with(getApplicationContext())
+                .asBitmap()
+                .load(wallpaperURL)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        WallpaperManager wallpaperManager
+                                = WallpaperManager.getInstance(getApplicationContext());
+                        try {
+                            wallpaperManager.setBitmap(resource);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        Toast
+                .makeText(
+                        getApplicationContext(),
+                        getResources().getString(R.string.toast_wallpaper_set),
+                        Toast.LENGTH_LONG
+                ).show();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ImageActivity.this);
+        builder
+                .setMessage(getResources().getString(R.string.title_alert))
+                .setCancelable(false)
+                .setPositiveButton("yes!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setWallpaper();
+                    }
+                })
+                .setNegativeButton("no!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        return builder.create();
     }
 }
