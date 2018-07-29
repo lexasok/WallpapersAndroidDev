@@ -18,7 +18,6 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private String mTitle;
     private String mColor = App.COLOR_NONE;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private RVAdapter mAdapter;
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
@@ -39,10 +38,6 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //init swipe to refresh
-        swipeRefreshLayout = view.findViewById(R.id.swipeToRefresh);
-        swipeRefreshLayout.setOnRefreshListener(this);
 
         //initRV
         recyclerView = view.findViewById(R.id.rvMainFragment);
@@ -130,7 +125,6 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 ));
             }
         }
-        swipeRefreshLayout.setRefreshing(false);
     }
 
     public void setmTitle(String title) {

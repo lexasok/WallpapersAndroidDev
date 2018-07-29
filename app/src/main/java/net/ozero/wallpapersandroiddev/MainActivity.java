@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     private Spinner colorsSpinner;
     private ViewPagerAdapter viewPagerAdapter;
     private String mColor;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +57,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //tabs & viewPager
-        final ViewPager viewPager = findViewById(R.id.viewPager);
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
         setupTabs(viewPager, tabLayout);
 
         //Color filter - spinner
