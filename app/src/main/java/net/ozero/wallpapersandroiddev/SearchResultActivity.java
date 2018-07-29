@@ -17,14 +17,26 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
+        String query = "yellow";
+
+        //init RV
         RecyclerView recyclerView = findViewById(R.id.rvSearchResult);
         layoutManager = new GridLayoutManager(this,App.NUM_OFCOLLUMS);
         recyclerView.setLayoutManager(layoutManager);
         rvAdapter = new RVAdapter(this);
         recyclerView.setAdapter(rvAdapter);
-        ContentLoader contentLoader = new ContentLoader(rvAdapter);
-        contentLoader.laodFirst();
-        recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter));
+
+        //loading data
+        ContentLoader contentLoader = new ContentLoader(
+                rvAdapter,
+                ContentLoader.LoadingType.search,
+                query,
+                null
+        );
+        contentLoader.load(App.FIRST_PAGE);
+
+        //paginate data
+        recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter, contentLoader));
     }
 
 }

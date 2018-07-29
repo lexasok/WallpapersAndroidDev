@@ -29,15 +29,11 @@ public class ContentLoader {
         mColor = color;
     }
 
-    public void loadNext(int page) {
-
-    }
-
-    public void laodFirst() {
+    public void load(int page) {
         switch (mLoadingType) {
             case search:
                 mApi
-                        .search(mQuery, FIRS_PAGE)
+                        .search(mQuery, page)
                         .enqueue(new Callback<Result>() {
                             @Override
                             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -57,7 +53,7 @@ public class ContentLoader {
 
             case category:
                 mApi
-                        .loadCategory(mQuery, FIRS_PAGE)
+                        .loadCategory(mQuery, page)
                         .enqueue(new Callback<Result>() {
                             @Override
                             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -77,7 +73,7 @@ public class ContentLoader {
 
             case categoryWithColor:
                 mApi
-                        .loadCategoryWithColor(mQuery, mColor, FIRS_PAGE)
+                        .loadCategoryWithColor(mQuery, mColor, page)
                         .enqueue(new Callback<Result>() {
                             @Override
                             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -97,7 +93,7 @@ public class ContentLoader {
 
             case editorChose:
                 mApi
-                        .loadEditorsChose(true, FIRS_PAGE)
+                        .loadEditorsChose(true, page)
                         .enqueue(new Callback<Result>() {
                             @Override
                             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -117,7 +113,7 @@ public class ContentLoader {
 
             case editorChoseWithColor:
                 mApi
-                        .loadEditorsChoiceWithColor(mColor, true, FIRS_PAGE)
+                        .loadEditorsChoiceWithColor(mColor, true, page)
                         .enqueue(new Callback<Result>() {
                             @Override
                             public void onResponse(Call<Result> call, Response<Result> response) {
@@ -138,8 +134,6 @@ public class ContentLoader {
             default:
                 break;
         }
-
-
     }
 
     public enum LoadingType {

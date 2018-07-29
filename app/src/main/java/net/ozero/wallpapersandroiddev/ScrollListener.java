@@ -41,7 +41,7 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
         if (lastVisibleItemPosition == loadingPosition - LOADING_ALLOWANCE - 1) {
             page += 1;
             loadingPosition += PER_PAGE;
-            mContentLoader.loadNext(page);
+            mContentLoader.load(page);
         }
 
     }
