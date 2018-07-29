@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,15 +14,15 @@ import android.widget.TextView;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
-import org.w3c.dom.Text;
-
-import java.util.Objects;
-
 public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private String mTitle;
-    private String color = "none";
+    private String mColor = App.COLOR_NONE;
     private TextView colorTestTextView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RVAdapter mAdapter;
+    private RecyclerView recyclerView;
+    private GridLayoutManager layoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,20 +34,19 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        //title
+        mTitle = getArguments().getString(App.KEY_TITLE);
+
         //init swipe to refresh
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeToRefresh);
+        swipeRefreshLayout = view.findViewById(R.id.swipeToRefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         //initRV
-        RecyclerView recyclerView = view.findViewById(R.id.rvMainFragment);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), App.NUM_OFCOLLUMS);
+        recyclerView = view.findViewById(R.id.rvMainFragment);
+        layoutManager = new GridLayoutManager(getActivity(), App.NUM_OF_COLUMNS);
         recyclerView.setLayoutManager(layoutManager);
-        RVAdapter adapter = new RVAdapter(getContext());
-        recyclerView.setAdapter(adapter);
-
-        //testing colors changing
-        colorTestTextView = view.findViewById(R.id.fragmentTextView);
-        colorTestTextView.setText(getArguments().getString(App.KEY_COLOR_TO_FRAGMENT));
+        mAdapter = new RVAdapter(getContext());
+        recyclerView.setAdapter(mAdapter);
 
         //loading data
 
@@ -63,6 +61,71 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void load() {
+        boolean isColoreFiltered = mColor.equals(App.COLOR_NONE);
+        boolean isEditorChoice = mTitle.equals(App.CATEGORY_BEST);
+        if (!isColoreFiltered) {
+            if (isEditorChoice) {
 
+                ContentLoader contentLoader = new ContentLoader(
+                        mAdapter,
+                        ContentLoader.LoadingType.editorChose,
+                        mTitle,
+                        mColor
+                );
+                contentLoader.load(App.FIRST_PAGE);
+                //pagination
+                recyclerView.addOnScrollListener(new ScrollListener(
+                        layoutManager,
+                        mAdapter,
+                        contentLoader
+                ));
+
+            } else {
+
+                ContentLoader contentLoader = new ContentLoader(
+                        mAdapter,
+                        ContentLoader.LoadingType.category,
+                        mTitle,
+                        mColor
+                );
+                //pagination
+                recyclerView.addOnScrollListener(new ScrollListener(
+                        layoutManager,
+                        mAdapter,
+                        contentLoader
+                ));
+            }
+        } else {
+
+            if (isEditorChoice) {
+                ContentLoader contentLoader = new ContentLoader(
+                        mAdapter,
+                        ContentLoader.LoadingType.editorChoseWithColor,
+                        mTitle,
+                        mColor
+                );
+                contentLoader.load(App.FIRST_PAGE);
+                //pagination
+                recyclerView.addOnScrollListener(new ScrollListener(
+                        layoutManager,
+                        mAdapter,
+                        contentLoader
+                ));
+            } else {
+
+                ContentLoader contentLoader = new ContentLoader(
+                        mAdapter,
+                        ContentLoader.LoadingType.categoryWithColor,
+                        mTitle,
+                        mColor
+                );
+                //pagination
+                recyclerView.addOnScrollListener(new ScrollListener(
+                        layoutManager,
+                        mAdapter,
+                        contentLoader
+                ));
+            }
+        }
     }
 }

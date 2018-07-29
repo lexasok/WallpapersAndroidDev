@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
 
     private Spinner colorsSpinner;
     private ViewPagerAdapter viewPagerAdapter;
+    private String mColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +73,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                mColor = colorsSpinner.getSelectedItem().toString();
+
                 ArrayList<String> titles = new ArrayList<>();
                 String[] stringArray = getResources().getStringArray(R.array.tabs);
                 Collections.addAll(titles, stringArray);
-                viewPagerAdapter.addFragments(titles, colorsSpinner.getSelectedItem().toString());
+                viewPagerAdapter.addFragments(titles, mColor);
                 Toast.makeText(getApplicationContext(), "Swipe to refresh!", Toast.LENGTH_LONG).show();
             }
 
@@ -159,6 +162,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public String getStringColor() {
+        return mColor;
     }
 
 }

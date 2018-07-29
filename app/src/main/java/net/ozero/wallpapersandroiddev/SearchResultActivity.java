@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
@@ -26,7 +25,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         //init RV
         RecyclerView recyclerView = findViewById(R.id.rvSearchResult);
-        layoutManager = new GridLayoutManager(this,App.NUM_OFCOLLUMS);
+        layoutManager = new GridLayoutManager(this,App.NUM_OF_COLUMNS);
         recyclerView.setLayoutManager(layoutManager);
         rvAdapter = new RVAdapter(this);
         recyclerView.setAdapter(rvAdapter);

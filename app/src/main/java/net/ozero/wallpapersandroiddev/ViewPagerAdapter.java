@@ -41,7 +41,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         mTitles.clear();
         for (String title : titles) {
             Bundle bundle = new Bundle();
-            bundle.putString(App.KEY_COLOR_TO_FRAGMENT, color);
             bundle.putString(App.KEY_TITLE, title);
             MainFragment fragment = new MainFragment();
             fragment.setArguments(bundle);
