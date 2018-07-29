@@ -10,6 +10,9 @@ public class App extends Application {
     public static final int NUM_OFCOLLUMS = 2;
     public static final int FIRST_PAGE = 1;
 
+    //Extras
+    public static final String EXTRA_SEARCH = "search";
+
     private static RestClient restClient;
 
     @Override

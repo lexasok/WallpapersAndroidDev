@@ -17,7 +17,8 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-        String query = "yellow";
+        //getting query
+        String query = getIntent().getStringExtra(App.EXTRA_SEARCH);
 
         //init RV
         RecyclerView recyclerView = findViewById(R.id.rvSearchResult);

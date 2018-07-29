@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+                intent.putExtra(App.EXTRA_SEARCH, query);
                 startActivity(intent);
                 return false;
             }
