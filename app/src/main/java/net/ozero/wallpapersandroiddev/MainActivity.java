@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -19,9 +21,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -67,10 +71,12 @@ public class MainActivity extends AppCompatActivity
         colorsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 ArrayList<String> titles = new ArrayList<>();
                 String[] stringArray = getResources().getStringArray(R.array.tabs);
                 Collections.addAll(titles, stringArray);
                 viewPagerAdapter.addFragments(titles, colorsSpinner.getSelectedItem().toString());
+                Toast.makeText(getApplicationContext(), "Swipe to refresh!", Toast.LENGTH_LONG).show();
             }
 
             @Override
