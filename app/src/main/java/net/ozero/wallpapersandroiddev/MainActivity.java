@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
                 ArrayList<String> titles = new ArrayList<>();
                 String[] stringArray = getResources().getStringArray(R.array.tabs);
                 Collections.addAll(titles, stringArray);
-//                viewPagerAdapter.addFragments(titles, mColor);
+                viewPagerAdapter.addFragments(titles, mColor);
                 Toast.makeText(getApplicationContext(), "Swipe to refresh!", Toast.LENGTH_LONG).show();
             }
 
