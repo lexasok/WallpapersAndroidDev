@@ -14,5 +14,6 @@
 
     <!--Titles-->
     <string name="title_colors">Choose color: </string>
+    <string name="title_set_wallpaper_button">SET WALLPAPER</string>
 
 </resources>
