@@ -14,5 +14,6 @@
 
     <!--Image-->
     <dimen name="size_image_preview_height">150dp</dimen>
+    <dimen name="padding_xs">1dp</dimen>
 
 </resources>
