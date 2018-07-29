@@ -20,6 +20,7 @@ public class ContentLoader {
     private Api mApi;
     private String mQuery;
     private String mColor;
+    private Callback<Result> mCallback;
 
     public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color) {
         mAdapter = adapter;
@@ -27,6 +28,22 @@ public class ContentLoader {
         mApi = App.getRestClient().getApi();
         mQuery = query;
         mColor = color;
+
+        mCallback = new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                if (response.isSuccessful()) {
+                    Result result = response.body();
+                    ArrayList<Hit> hits = result.getHits();
+                    mAdapter.addData(hits);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+
+            }
+        };
     }
 
     public void load(int page) {
@@ -34,101 +51,31 @@ public class ContentLoader {
             case search:
                 mApi
                         .search(mQuery, page)
-                        .enqueue(new Callback<Result>() {
-                            @Override
-                            public void onResponse(Call<Result> call, Response<Result> response) {
-                                if (response.isSuccessful()) {
-                                    Result result = response.body();
-                                    ArrayList<Hit> hits = result.getHits();
-                                    mAdapter.addData(hits);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Result> call, Throwable t) {
-
-                            }
-                        });
+                        .enqueue(mCallback);
                 break;
 
             case category:
                 mApi
                         .loadCategory(mQuery, page)
-                        .enqueue(new Callback<Result>() {
-                            @Override
-                            public void onResponse(Call<Result> call, Response<Result> response) {
-                                if (response.isSuccessful()) {
-                                    Result result = response.body();
-                                    ArrayList<Hit> hits = result.getHits();
-                                    mAdapter.addData(hits);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Result> call, Throwable t) {
-
-                            }
-                        });
+                        .enqueue(mCallback);
                 break;
 
             case categoryWithColor:
                 mApi
                         .loadCategoryWithColor(mQuery, mColor, page)
-                        .enqueue(new Callback<Result>() {
-                            @Override
-                            public void onResponse(Call<Result> call, Response<Result> response) {
-                                if (response.isSuccessful()) {
-                                    Result result = response.body();
-                                    ArrayList<Hit> hits = result.getHits();
-                                    mAdapter.addData(hits);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Result> call, Throwable t) {
-
-                            }
-                        });
+                        .enqueue(mCallback);
                 break;
 
             case editorChose:
                 mApi
                         .loadEditorsChose(true, page)
-                        .enqueue(new Callback<Result>() {
-                            @Override
-                            public void onResponse(Call<Result> call, Response<Result> response) {
-                                if (response.isSuccessful()) {
-                                    Result result = response.body();
-                                    ArrayList<Hit> hits = result.getHits();
-                                    mAdapter.addData(hits);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Result> call, Throwable t) {
-
-                            }
-                        });
+                        .enqueue(mCallback);
                 break;
 
             case editorChoseWithColor:
                 mApi
                         .loadEditorsChoiceWithColor(mColor, true, page)
-                        .enqueue(new Callback<Result>() {
-                            @Override
-                            public void onResponse(Call<Result> call, Response<Result> response) {
-                                if (response.isSuccessful()) {
-                                    Result result = response.body();
-                                    ArrayList<Hit> hits = result.getHits();
-                                    mAdapter.addData(hits);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Result> call, Throwable t) {
-
-                            }
-                        });
+                        .enqueue(mCallback);
                 break;
 
             default:
