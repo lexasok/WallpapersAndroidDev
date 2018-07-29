@@ -16,6 +16,7 @@ public class App extends Application {
     public static final String EXTRA_SEARCH = "search";
     public static final String EXTRA_IMAGE = "image";
     public static final String EXTRA_URL = "URL";
+    public static final String EXTRA_WALLPAPER = "wallpaper";
 
     private static RestClient restClient;
 

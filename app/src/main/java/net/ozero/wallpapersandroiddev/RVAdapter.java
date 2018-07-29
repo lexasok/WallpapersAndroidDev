@@ -51,8 +51,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
 
                 Hit hit = mData.get(position);
                 Intent intent = new Intent(mContext, ImageActivity.class);
-                intent.putExtra(App.EXTRA_IMAGE, hit.getFullHDURL());
+                intent.putExtra(App.EXTRA_IMAGE, hit.getWebformatURL());
                 intent.putExtra(App.EXTRA_URL, hit.getPageUrl());
+                intent.putExtra(App.EXTRA_WALLPAPER, hit.getLargeImageURL());
 
                 mContext.startActivity(intent);
             }
