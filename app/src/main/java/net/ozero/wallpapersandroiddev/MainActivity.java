@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mColor = App.COLOR_NONE;
+
         //toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         //tabs & viewPager
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
-        setupTabs(viewPager, tabLayout, App.COLOR_NONE);
 
         //Color filter - spinner
         colorsSpinner = findViewById(R.id.chooseColoresSpinner);
@@ -77,11 +78,8 @@ public class MainActivity extends AppCompatActivity
 
                 mColor = colorsSpinner.getSelectedItem().toString();
 
-                ArrayList<String> titles = new ArrayList<>();
-                String[] stringArray = getResources().getStringArray(R.array.tabs);
-                Collections.addAll(titles, stringArray);
-                viewPagerAdapter.addFragments(titles, mColor);
-                Toast.makeText(getApplicationContext(), "Swipe to refresh!", Toast.LENGTH_LONG).show();
+                setupTabs(viewPager, tabLayout, mColor);
+
             }
 
             @Override
@@ -92,6 +90,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void setupTabs(ViewPager viewPager, TabLayout tabLayout, String color) {
         //getting titles
         ArrayList<String> titles = new ArrayList<>();
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity
 
         //implement adapter
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragments(titles, "none");
+        viewPagerAdapter.addFragments(titles, color);
 
         //setup viewPager
         viewPager.setAdapter(viewPagerAdapter);
@@ -164,10 +167,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public String getStringColor() {
-        return mColor;
     }
 
 }

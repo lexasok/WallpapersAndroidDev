@@ -17,7 +17,7 @@ import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private String mTitle;
-    private String mColor = App.COLOR_NONE;
+    private String mColor;
     private RVAdapter mAdapter;
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
