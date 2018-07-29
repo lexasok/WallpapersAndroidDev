@@ -9,7 +9,6 @@ import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    private static final int NUM_OF_COLUMS = 2;
     private RVAdapter rvAdapter;
     private GridLayoutManager layoutManager;
 
@@ -19,13 +18,13 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
         RecyclerView recyclerView = findViewById(R.id.rvSearchResult);
-        layoutManager = new GridLayoutManager(this, NUM_OF_COLUMS);
+        layoutManager = new GridLayoutManager(this,App.NUM_OFCOLLUMS);
         recyclerView.setLayoutManager(layoutManager);
         rvAdapter = new RVAdapter(this);
         recyclerView.setAdapter(rvAdapter);
         ContentLoader contentLoader = new ContentLoader(rvAdapter);
         contentLoader.loadFirs();
-//        recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter));
+        recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter));
     }
 
 }

@@ -10,6 +10,8 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
 
     private static final int PER_PAGE = 20;
     private static final int FIRS_PAGE_NUM = 1;
+    private static final int LOADING_ALLOWANCE = 6;
+
 
     private GridLayoutManager mLayoutManager;
     private RVAdapter mAdapter;
@@ -34,6 +36,12 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
         super.onScrolled(recyclerView, dx, dy);
 
         int lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
+        if (lastVisibleItemPosition == loadingPosition - LOADING_ALLOWANCE - 1) {
+            page += 1;
+            loadingPosition += PER_PAGE;
+            ContentLoader contentLoader = new ContentLoader(mAdapter);
+            contentLoader.loadNext(page);
+        }
 
     }
 }
