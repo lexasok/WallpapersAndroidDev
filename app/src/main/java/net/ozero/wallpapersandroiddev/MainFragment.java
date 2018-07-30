@@ -86,7 +86,8 @@ public class MainFragment extends Fragment {
                 loadingType,
                 mTitle,
                 mColor,
-                progressBar
+                progressBar,
+                getContext()
         );
         contentLoader.load(App.FIRST_PAGE);
         //pagination

@@ -43,7 +43,8 @@ public class SearchResultActivity extends AppCompatActivity {
                 ContentLoader.LoadingType.search,
                 mQuery,
                 null,
-                progressBar
+                progressBar,
+                getApplicationContext()
         );
         contentLoader.load(App.FIRST_PAGE);
 

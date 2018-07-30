@@ -1,13 +1,16 @@
 package net.ozero.wallpapersandroiddev.rest;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import net.ozero.wallpapersandroiddev.App;
 import net.ozero.wallpapersandroiddev.RVAdapter;
 import net.ozero.wallpapersandroiddev.rest.model.Hit;
 import net.ozero.wallpapersandroiddev.rest.model.Result;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -17,6 +20,7 @@ import retrofit2.Response;
 public class ContentLoader {
 
     private static final int FIRS_PAGE = 1;
+    private static final String ERROR = "ERROR";
 
     private RVAdapter mAdapter;
     private LoadingType mLoadingType;
@@ -25,15 +29,17 @@ public class ContentLoader {
     private String mColor;
     private Callback<Result> mCallback;
     private ProgressBar mProgressBar;
+    private Context mContext;
 //    private RestClient mRestClient;
 
-    public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color, ProgressBar progressBar) {
+    public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color, ProgressBar progressBar, Context context) {
         mAdapter = adapter;
         mLoadingType = loadingType;
         mApi = App.getRestClient().getApi();
         mQuery = query;
         mColor = color;
         mProgressBar = progressBar;
+        mContext = context;
 
         mCallback = new Callback<Result>() {
             @Override
@@ -43,12 +49,21 @@ public class ContentLoader {
                     ArrayList<Hit> hits = result.getHits();
                     mAdapter.addData(hits);
                     mProgressBar.setVisibility(View.INVISIBLE);
+                } else {
+                    String error = ERROR;
+                    try {
+                        error = response.errorBody().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
-
+                Toast.makeText(mContext, t.getCause().toString(), Toast.LENGTH_LONG).show();
             }
         };
     }
