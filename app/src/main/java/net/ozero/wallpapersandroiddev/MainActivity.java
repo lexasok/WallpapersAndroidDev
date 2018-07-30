@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -159,11 +158,11 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(homeIntent);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_share) {
 
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            String shareBody = "Here is the share content body";
+            String shareBody = getResources().getString(R.string.body_share_main);
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
