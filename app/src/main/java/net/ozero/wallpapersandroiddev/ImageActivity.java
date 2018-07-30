@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.WallpaperManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -74,10 +75,12 @@ public class ImageActivity extends AppCompatActivity {
 
         if (getIntent().hasExtra(App.EXTRA_IMAGE)) {
 
+            //getting data
             imageURL = getIntent().getStringExtra(App.EXTRA_IMAGE);
             pageURL = getIntent().getStringExtra(App.EXTRA_URL);
             wallpaperURL = getIntent().getStringExtra(App.EXTRA_WALLPAPER);
 
+            //loading preview
             Glide
                     .with(this)
                     .load(imageURL)
@@ -85,6 +88,7 @@ public class ImageActivity extends AppCompatActivity {
 
             link.setText(pageURL);
 
+            //setting wallpaper
             setWallpaperButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,6 +100,15 @@ public class ImageActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
+                }
+            });
+
+            //open source link
+            link.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pageURL));
+                    startActivity(browserIntent);
                 }
             });
         }
