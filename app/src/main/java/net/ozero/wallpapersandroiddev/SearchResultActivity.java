@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
@@ -21,6 +22,7 @@ public class SearchResultActivity extends AppCompatActivity {
         //getting query
         if (getIntent().hasExtra(App.EXTRA_SEARCH)) {
             mQuery = getIntent().getStringExtra(App.EXTRA_SEARCH);
+            setTitle(mQuery);
         }
 
         //init RV
@@ -43,17 +45,15 @@ public class SearchResultActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter, contentLoader));
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putString(App.EXTRA_SEARCH, mQuery);
-
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        mQuery = savedInstanceState.getString(App.EXTRA_SEARCH);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
