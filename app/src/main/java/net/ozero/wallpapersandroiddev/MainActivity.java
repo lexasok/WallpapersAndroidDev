@@ -36,21 +36,21 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //default color filter
         mColor = App.COLOR_NONE;
 
         //toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //navigation
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //tabs & viewPager
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -168,12 +168,10 @@ public class MainActivity extends AppCompatActivity
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent,
                     getResources().getString(R.string.share_via)));
-
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

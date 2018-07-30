@@ -11,18 +11,15 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
     private static final int FIRS_PAGE_NUM = 1;
     private static final int LOADING_ALLOWANCE = 6;
 
-
     private GridLayoutManager mLayoutManager;
-    private RVAdapter mAdapter;
     private int loadingPosition;
     private int page;
     private ContentLoader mContentLoader;
 
 
-    public ScrollListener(GridLayoutManager layoutManager, RVAdapter adapter, ContentLoader contentLoader) {
+    public ScrollListener(GridLayoutManager layoutManager, ContentLoader contentLoader) {
         mLayoutManager = layoutManager;
         loadingPosition = PER_PAGE;
-        mAdapter = adapter;
         page = FIRS_PAGE_NUM;
         mContentLoader = contentLoader;
 
@@ -43,6 +40,5 @@ public class ScrollListener extends RecyclerView.OnScrollListener{
             loadingPosition += PER_PAGE;
             mContentLoader.load(page);
         }
-
     }
 }

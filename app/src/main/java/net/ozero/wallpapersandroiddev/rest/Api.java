@@ -9,7 +9,6 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-
     @GET("?key=" + App.API_KEY)
     Call<Result> search(
             @Query("q") String query,

@@ -10,7 +10,6 @@ import net.ozero.wallpapersandroiddev.RVAdapter;
 import net.ozero.wallpapersandroiddev.rest.model.Hit;
 import net.ozero.wallpapersandroiddev.rest.model.Result;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -19,7 +18,6 @@ import retrofit2.Response;
 
 public class ContentLoader {
 
-    private static final int FIRS_PAGE = 1;
     private static final String ERROR = "ERROR";
 
     private RVAdapter mAdapter;
@@ -30,7 +28,6 @@ public class ContentLoader {
     private Callback<Result> mCallback;
     private ProgressBar mProgressBar;
     private Context mContext;
-//    private RestClient mRestClient;
 
     public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color, ProgressBar progressBar, Context context) {
         mAdapter = adapter;
@@ -46,6 +43,7 @@ public class ContentLoader {
             public void onResponse(Call<Result> call, Response<Result> response) {
                 if (response.isSuccessful()) {
                     Result result = response.body();
+                    assert result != null;
                     ArrayList<Hit> hits = result.getHits();
                     mAdapter.addData(hits);
                     mProgressBar.setVisibility(View.INVISIBLE);

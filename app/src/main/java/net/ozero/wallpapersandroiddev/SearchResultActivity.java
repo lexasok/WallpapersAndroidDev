@@ -49,9 +49,8 @@ public class SearchResultActivity extends AppCompatActivity {
         contentLoader.load(App.FIRST_PAGE);
 
         //paginate data
-        recyclerView.addOnScrollListener(new ScrollListener(layoutManager, rvAdapter, contentLoader));
+        recyclerView.addOnScrollListener(new ScrollListener(layoutManager, contentLoader));
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

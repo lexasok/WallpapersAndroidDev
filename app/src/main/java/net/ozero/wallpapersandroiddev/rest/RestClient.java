@@ -1,7 +1,5 @@
 package net.ozero.wallpapersandroiddev.rest;
 
-import net.ozero.wallpapersandroiddev.App;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

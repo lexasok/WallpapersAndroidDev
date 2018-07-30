@@ -1,17 +1,13 @@
 package net.ozero.wallpapersandroiddev.rest;
 
-import net.ozero.wallpapersandroiddev.SearchResultActivity;
 import net.ozero.wallpapersandroiddev.rest.model.Result;
 
 import org.junit.Test;
 
 import java.io.IOException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
-import static org.junit.Assert.*;
 
 public class RestClientTest {
 

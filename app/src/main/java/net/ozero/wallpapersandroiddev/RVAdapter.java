@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import net.ozero.wallpapersandroiddev.rest.model.Hit;
-import net.ozero.wallpapersandroiddev.rest.model.Result;
 
 import java.util.ArrayList;
 
@@ -37,7 +36,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         ImageView imageView = holder.imageView;
         Glide
@@ -49,7 +48,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
 
-                Hit hit = mData.get(position);
+                Hit hit = mData.get(holder.getAdapterPosition());
                 Intent intent = new Intent(mContext, ImageActivity.class);
                 intent.putExtra(App.EXTRA_IMAGE, hit.getWebformatURL());
                 intent.putExtra(App.EXTRA_URL, hit.getPageUrl());

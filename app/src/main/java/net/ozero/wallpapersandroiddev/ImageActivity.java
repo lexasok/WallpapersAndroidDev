@@ -1,22 +1,15 @@
 package net.ozero.wallpapersandroiddev;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.WallpaperManager;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Looper;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,14 +18,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 public class ImageActivity extends AppCompatActivity {
 
