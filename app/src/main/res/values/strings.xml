@@ -25,5 +25,8 @@
     <!--Share-->
     <string name="body_share_main">Just look images on https://pixabay.com/</string>
     <string name="subject_share_main">Service</string>
+    <string name="subject_share_image">Image page:</string>
+    <string name="body_share_image">Nice image:</string>
+    <string name="share_via">Share via</string>
 
 </resources>

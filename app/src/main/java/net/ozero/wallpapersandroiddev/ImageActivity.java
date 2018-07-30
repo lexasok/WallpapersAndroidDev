@@ -60,6 +60,7 @@ public class ImageActivity extends AppCompatActivity {
         alertLinearLayout = findViewById(R.id.alertLinearLayout);
         confirmButton = findViewById(R.id.confirmButton);
         discardButton = findViewById(R.id.discardButton);
+        ImageView share = findViewById(R.id.shareImage);
 
         //init alert buttons
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +116,14 @@ public class ImageActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //inti share
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share();
+            }
+        });
     }
 
     private void setWallpaper() {
@@ -162,4 +171,17 @@ public class ImageActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void share() {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = pageURL;
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                getResources().getString(R.string.subject_share_image));
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent,
+                getResources().getString(R.string.share_via)));
+    }
+
 }
