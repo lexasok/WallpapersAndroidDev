@@ -50,20 +50,13 @@ public class ContentLoader {
                     mAdapter.addData(hits);
                     mProgressBar.setVisibility(View.INVISIBLE);
                 } else {
-                    String error = ERROR;
-                    try {
-                        error = response.errorBody().string();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, ERROR, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
-                Toast.makeText(mContext, t.getCause().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, ERROR, Toast.LENGTH_LONG).show();
             }
         };
     }

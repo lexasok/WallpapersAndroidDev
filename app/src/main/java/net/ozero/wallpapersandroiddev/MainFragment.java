@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
+import java.util.Objects;
+
 public class MainFragment extends Fragment {
 
     private String mTitle;
