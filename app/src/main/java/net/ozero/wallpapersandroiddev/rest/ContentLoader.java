@@ -1,5 +1,8 @@
 package net.ozero.wallpapersandroiddev.rest;
 
+import android.view.View;
+import android.widget.ProgressBar;
+
 import net.ozero.wallpapersandroiddev.App;
 import net.ozero.wallpapersandroiddev.RVAdapter;
 import net.ozero.wallpapersandroiddev.rest.model.Hit;
@@ -21,15 +24,16 @@ public class ContentLoader {
     private String mQuery;
     private String mColor;
     private Callback<Result> mCallback;
+    private ProgressBar mProgressBar;
 //    private RestClient mRestClient;
 
-    public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color) {
+    public ContentLoader(RVAdapter adapter, LoadingType loadingType, String query, String color, ProgressBar progressBar) {
         mAdapter = adapter;
         mLoadingType = loadingType;
-//        mRestClient = new RestClient();
         mApi = App.getRestClient().getApi();
         mQuery = query;
         mColor = color;
+        mProgressBar = progressBar;
 
         mCallback = new Callback<Result>() {
             @Override
@@ -38,6 +42,7 @@ public class ContentLoader {
                     Result result = response.body();
                     ArrayList<Hit> hits = result.getHits();
                     mAdapter.addData(hits);
+                    mProgressBar.setVisibility(View.INVISIBLE);
                 }
             }
 

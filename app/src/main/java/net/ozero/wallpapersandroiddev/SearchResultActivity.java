@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
@@ -18,6 +20,8 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+
+        ProgressBar progressBar = findViewById(R.id.progressBarSearchActivity);
 
         //getting query
         if (getIntent().hasExtra(App.EXTRA_SEARCH)) {
@@ -33,11 +37,13 @@ public class SearchResultActivity extends AppCompatActivity {
         recyclerView.setAdapter(rvAdapter);
 
         //loading data
+        progressBar.setVisibility(View.VISIBLE);
         ContentLoader contentLoader = new ContentLoader(
                 rvAdapter,
                 ContentLoader.LoadingType.search,
                 mQuery,
-                null
+                null,
+                progressBar
         );
         contentLoader.load(App.FIRST_PAGE);
 

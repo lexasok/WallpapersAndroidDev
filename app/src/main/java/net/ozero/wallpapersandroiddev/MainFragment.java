@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
@@ -21,6 +22,7 @@ public class MainFragment extends Fragment {
     private RVAdapter mAdapter;
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        progressBar = view.findViewById(R.id.progressBarFragment);
 
         //initRV
         recyclerView = view.findViewById(R.id.rvMainFragment);
@@ -60,13 +64,13 @@ public class MainFragment extends Fragment {
             if (isEditorChoice) {
                 loadingType = ContentLoader.LoadingType.editorChoice;
             } else {
-                loadingType = ContentLoader.LoadingType.category
+                loadingType = ContentLoader.LoadingType.category;
             }
         } else {
             if (isEditorChoice) {
-                loadingType = ContentLoader.LoadingType.editorChoseWithColor
+                loadingType = ContentLoader.LoadingType.editorChoseWithColor;
             } else {
-                loadingType = ContentLoader.LoadingType.categoryWithColor
+                loadingType = ContentLoader.LoadingType.categoryWithColor;
             }
         }
 
@@ -75,11 +79,14 @@ public class MainFragment extends Fragment {
 
     private void loadData(ContentLoader.LoadingType loadingType) {
 
+        progressBar.setVisibility(View.VISIBLE);
+
         ContentLoader contentLoader = new ContentLoader(
                 mAdapter,
                 loadingType,
                 mTitle,
-                mColor
+                mColor,
+                progressBar
         );
         contentLoader.load(App.FIRST_PAGE);
         //pagination
