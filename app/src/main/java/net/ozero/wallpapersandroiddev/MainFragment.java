@@ -127,6 +127,10 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }
     }
 
+    private void loadData(ContentLoader.LoadingType loadingType) {
+
+    }
+
     public void setmTitle(String title) {
         mTitle = title;
     }
