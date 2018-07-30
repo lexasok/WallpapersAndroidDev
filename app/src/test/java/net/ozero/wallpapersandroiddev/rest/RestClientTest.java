@@ -28,34 +28,5 @@ public class RestClientTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        restClient.getApi().search("yellow", "photo").enqueue(new Callback<Result>() {
-//            @Override
-//            public void onResponse(Call<Result> call, Response<Result> response) {
-//                System.out.println("response");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Result> call, Throwable t) {
-//                System.out.println("fail");
-//            }
-//        });
     }
-
-    @Test
-    public void searchPaginated() {
-        RestClient restClient = new RestClient();
-        try {
-            Response response = restClient.getApi().searchPaginated("yellow", "photo", 1, 10).execute();
-            System.out.println("resp");
-            Result result = (Result) response.body();
-
-            System.out.println(result.getHits().size());
-            assertEquals(10, result.getHits().size());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
