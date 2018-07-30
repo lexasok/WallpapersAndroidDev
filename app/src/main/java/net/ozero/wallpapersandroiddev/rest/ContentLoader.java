@@ -47,8 +47,6 @@ public class ContentLoader {
                     ArrayList<Hit> hits = result.getHits();
                     mAdapter.addData(hits);
                     mProgressBar.setVisibility(View.INVISIBLE);
-                } else {
-                    Toast.makeText(mContext, ERROR, Toast.LENGTH_LONG).show();
                 }
             }
 
