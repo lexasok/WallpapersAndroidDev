@@ -64,13 +64,23 @@
         </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_text_m"
+            android:textColor="@color/colorTextBright"
+            android:padding="@dimen/padding_s"
+            android:text="@string/linkTitle"
+            android:gravity="center"/>
+
+        <TextView
             android:id="@+id/imageInfoTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/size_text_m"
             android:textColor="@color/colorTextBright"
             android:padding="@dimen/padding_s"
-            tools:text="info" />
+            tools:text="info"
+            android:gravity="center"/>
 
     </LinearLayout>
 </ScrollView>

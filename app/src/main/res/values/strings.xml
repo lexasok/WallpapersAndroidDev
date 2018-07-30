@@ -20,5 +20,6 @@
     <!--Toasts-->
     <string name="toast_wallpaper_set">Wallpaper set!</string>
     <string name="title_alert">Set Wallpapers?</string>
+    <string name="linkTitle">Source:</string>
 
 </resources>
