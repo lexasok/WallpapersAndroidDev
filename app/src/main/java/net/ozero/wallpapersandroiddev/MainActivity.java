@@ -152,6 +152,12 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_exit) {
 
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            startActivity(homeIntent);
+
         } else if (id == R.id.nav_manage) {
 
         }
