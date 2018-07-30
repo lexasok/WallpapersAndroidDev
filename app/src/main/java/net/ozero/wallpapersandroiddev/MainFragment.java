@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import net.ozero.wallpapersandroiddev.rest.ContentLoader;
 
-public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class MainFragment extends Fragment {
 
     private String mTitle;
     private String mColor;
@@ -47,87 +47,47 @@ public class MainFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         recyclerView.setAdapter(mAdapter);
 
         //loading data
-        load();
+        loadData(getLoadingType());
     }
 
-    @Override
-    public void onRefresh() {
-//        load();
-    }
+    private ContentLoader.LoadingType getLoadingType() {
 
-    private void load() {
+        ContentLoader.LoadingType loadingType;
 
         boolean isColorFiltered = !mColor.equals(App.COLOR_NONE);
         boolean isEditorChoice = mTitle.equals(App.CATEGORY_BEST);
         if (!isColorFiltered) {
             if (isEditorChoice) {
-
-                ContentLoader contentLoader = new ContentLoader(
-                        mAdapter,
-                        ContentLoader.LoadingType.editorChoice,
-                        mTitle,
-                        mColor
-                );
-                contentLoader.load(App.FIRST_PAGE);
-                //pagination
-                recyclerView.addOnScrollListener(new ScrollListener(
-                        layoutManager,
-                        mAdapter,
-                        contentLoader
-                ));
-
+                loadingType = ContentLoader.LoadingType.editorChoice;
             } else {
-
-                ContentLoader contentLoader = new ContentLoader(
-                        mAdapter,
-                        ContentLoader.LoadingType.category,
-                        mTitle,
-                        mColor
-                );
-                contentLoader.load(App.FIRST_PAGE);
-                //pagination
-                recyclerView.addOnScrollListener(new ScrollListener(
-                        layoutManager,
-                        mAdapter,
-                        contentLoader
-                ));
+                loadingType = ContentLoader.LoadingType.category
             }
         } else {
-
             if (isEditorChoice) {
-                ContentLoader contentLoader = new ContentLoader(
-                        mAdapter,
-                        ContentLoader.LoadingType.editorChoseWithColor,
-                        mTitle,
-                        mColor
-                );
-                contentLoader.load(App.FIRST_PAGE);
-                //pagination
-                recyclerView.addOnScrollListener(new ScrollListener(
-                        layoutManager,
-                        mAdapter,
-                        contentLoader
-                ));
+                loadingType = ContentLoader.LoadingType.editorChoseWithColor
             } else {
-
-                ContentLoader contentLoader = new ContentLoader(
-                        mAdapter,
-                        ContentLoader.LoadingType.categoryWithColor,
-                        mTitle,
-                        mColor
-                );
-                contentLoader.load(App.FIRST_PAGE);
-                //pagination
-                recyclerView.addOnScrollListener(new ScrollListener(
-                        layoutManager,
-                        mAdapter,
-                        contentLoader
-                ));
+                loadingType = ContentLoader.LoadingType.categoryWithColor
             }
         }
+
+        return loadingType;
     }
 
     private void loadData(ContentLoader.LoadingType loadingType) {
+
+        ContentLoader contentLoader = new ContentLoader(
+                mAdapter,
+                loadingType,
+                mTitle,
+                mColor
+        );
+        contentLoader.load(App.FIRST_PAGE);
+        //pagination
+        recyclerView.addOnScrollListener(new ScrollListener(
+                layoutManager,
+                mAdapter,
+                contentLoader
+        ));
 
     }
 
