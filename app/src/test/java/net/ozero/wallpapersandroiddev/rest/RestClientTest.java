@@ -19,7 +19,7 @@ public class RestClientTest {
     public void search() {
         RestClient restClient = new RestClient();
         try {
-            Response response = restClient.getApi().search("yellow", "photo").execute();
+            Response response = restClient.getApi().search("yellow", 1).execute();
             System.out.println("resp");
             Result result = (Result) response.body();
 
